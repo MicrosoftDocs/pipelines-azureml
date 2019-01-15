@@ -12,7 +12,7 @@ steps:
   inputs:
     azureSubscription: larrymltest
     scriptLocation: scriptPath
-    scriptPath: test.sh
+    scriptPath: build.sh
 
 - task: PublishBuildArtifacts@1
   inputs:

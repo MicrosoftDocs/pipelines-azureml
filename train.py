@@ -25,6 +25,10 @@ data = {"train": {"X": X_train, "y": y_train},
 # list of numbers from 0.0 to 1.0 with a 0.05 interval
 alphas = np.arange(0.0, 1.0, 0.05)
 
+# used to determine best model
+lowest_mse = None
+best_model = ''
+
 for alpha in alphas:
     # Use Ridge algorithm to create a regression model
     reg = Ridge(alpha=alpha)
@@ -32,15 +36,22 @@ for alpha in alphas:
 
     preds = reg.predict(data["test"]["X"])
     mse = mean_squared_error(preds, data["test"]["y"])
-    # run.log('alpha', alpha)
-    # run.log('mse', mse)
+    run.log('alpha', alpha)
+    run.log('mse', mse)
 
     model_file_name = 'ridge_{0:.2f}.pkl'.format(alpha)
+
+    # is this the best model (lowest MSE)?
+    if (lowest_mse == None) or (lowest_mse > mse):
+        lowest_mse = mse
+        best_model = model_file_name
+    
     # save model in the outputs folder so it automatically get uploaded
     with open(model_file_name, "wb") as file:
         joblib.dump(value=reg, filename=os.path.join('./outputs/',
                                                      model_file_name))
-    # run.log('models', model_file_name)
-    run.log_row('model', {'alpha': alpha, 'mse': mse, 'modelfile': model_file_name})
-    
+
     print('alpha is {0:.2f}, and mse is {1:0.2f}'.format(alpha, mse))
+
+# Log the best model name so we can easily get it.
+run.log('best', best_model)

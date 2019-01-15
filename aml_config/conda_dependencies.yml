@@ -11,5 +11,5 @@ dependencies:
 - python=3.6.2
 
 - pip:
-  - azureml-defaults==0.1.74
+  - azureml-defaults==1.0.6
 - scikit-learn
