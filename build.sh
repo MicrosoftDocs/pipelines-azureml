@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Set to your Azure Machine Learning workspace name
-WORKSPACE='ldfml'
-RESOURCEGROUP='larrygroup0102'
+WORKSPACE='your-workspace'
+RESOURCEGROUP='your-resource-group'
 EXPERIMENT='myexperiment'
 
 echo "Adding ML extension"
