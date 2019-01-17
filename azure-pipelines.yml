@@ -10,9 +10,9 @@ steps:
 - task: AzureCLI@1
   displayName: 'Training model'
   inputs:
-    azureSubscription: larrymltest
+    azureSubscription: mysubscription
     scriptLocation: scriptPath
-    scriptPath: test.sh
+    scriptPath: build.sh
 
 - task: PublishBuildArtifacts@1
   inputs:

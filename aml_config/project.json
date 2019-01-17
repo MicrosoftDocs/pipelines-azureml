@@ -1,1 +1,1 @@
-{"Id": "myexperiment", "Scope": "/subscriptions/<mysubscriptionid>/resourceGroups/<myresourcegrou>/providers/Microsoft.MachineLearningServices/workspaces/<myworkspace>/projects/myexperiment"}
+{"Id": "myexperiment", "Scope": "/subscriptions/<your-subscription>/resourceGroups/<your-group>/providers/Microsoft.MachineLearningServices/workspaces/<your-workspace>/projects/myexperiment"}
