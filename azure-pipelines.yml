@@ -1,20 +1,88 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+
+trigger:
+- master
 
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: 'Ubuntu-16.04'
 
 steps:
-- task: AzureCLI@1
-  displayName: 'Training model'
-  inputs:
-    azureSubscription: mysubscription
-    scriptLocation: scriptPath
-    scriptPath: build.sh
 
-- task: PublishBuildArtifacts@1
+- task: AzureCLI@1
+  displayName: 'Install the CLI'
   inputs:
-    pathtoPublish: '$(Build.SourcesDirectory)/output.txt'
-    artifactName: model_output
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az extension add -s https://azuremlsdktestpypi.blob.core.windows.net/wheels/Smoke-tests-windows-az-extension-add/2819352/azure_cli_ml-0.1.0.2819352-py2.py3-none-any.whl --pip-extra-index-urls https://azuremlsdktestpypi.azureedge.net/Smoke-tests-windows-az-extension-add/2819352 --yes --debug'
+
+    
+
+- task: AzureCLI@1
+  displayName: 'Attach folder to workspace'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml folder attach'
+  
+
+- task: AzureCLI@1
+  displayName: 'Create compute cluster'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml computetarget create amlcompute -n cpucicd --min-nodes 1 --max-nodes 1 -s STANDARD_D3_V2'
+
+- task: AzureCLI@1
+  displayName: 'List experiments'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml experiment list'
+
+- task: AzureCLI@1
+  displayName: 'Submit script run'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml run submit-script -e test -d myenv.yml train.py'
+
+- task: AzureCLI@1
+  displayName: 'Register model'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml model register -n sklearn_regression_model.pkl -p sklearn_regression_model.pkl'
+
+- task: AzureCLI@1
+  displayName: 'Deploy model'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml model deploy -n acicicd -m sklearn_regression_model.pkl:1 -s score.py -c myenv.yml -r python -df deploymentConfig.yml'
+
+- task: AzureCLI@1
+  displayName: 'List deployed services'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml service list'
+
+- task: AzureCLI@1
+  displayName: 'Delete deployed service'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml service delete -n acicicd'
+
+- task: AzureCLI@1
+  displayName: 'List pipelines'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml pipeline list'
+
+- task: AzureCLI@1
+  displayName: 'Remove created compute cluster'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml computetarget delete -n cpucicd'

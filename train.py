@@ -9,6 +9,7 @@ from azureml.core.run import Run
 from sklearn.externals import joblib
 import os
 import numpy as np
+import mylib
 
 os.makedirs('./outputs', exist_ok=True)
 
@@ -23,11 +24,7 @@ data = {"train": {"X": X_train, "y": y_train},
         "test": {"X": X_test, "y": y_test}}
 
 # list of numbers from 0.0 to 1.0 with a 0.05 interval
-alphas = np.arange(0.0, 1.0, 0.05)
-
-# used to determine best model
-lowest_mse = None
-best_model = ''
+alphas = mylib.get_alphas()
 
 for alpha in alphas:
     # Use Ridge algorithm to create a regression model
@@ -40,18 +37,9 @@ for alpha in alphas:
     run.log('mse', mse)
 
     model_file_name = 'ridge_{0:.2f}.pkl'.format(alpha)
-
-    # is this the best model (lowest MSE)?
-    if (lowest_mse == None) or (lowest_mse > mse):
-        lowest_mse = mse
-        best_model = model_file_name
-    
     # save model in the outputs folder so it automatically get uploaded
     with open(model_file_name, "wb") as file:
         joblib.dump(value=reg, filename=os.path.join('./outputs/',
                                                      model_file_name))
 
     print('alpha is {0:.2f}, and mse is {1:0.2f}'.format(alpha, mse))
-
-# Log the best model name so we can easily get it.
-run.log('best', best_model)
