@@ -13,7 +13,7 @@ def init():
     global model
     # note here "sklearn_regression_model.pkl" is the name of the model registered under
     # this is a different behavior than before when the code is run locally, even though the code is the same.
-    model_path = Model.get_model_path('sklearn_regression_model.pkl')
+    model_path = Model.get_model_path('mymodel')
     # deserialize the model file back into a sklearn model
     model = joblib.load(model_path)
 
