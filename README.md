@@ -4,4 +4,4 @@ For more info, please visit https://docs.microsoft.com/en-us/azure/machine-learn
 
 # How to use
 You can clone this repo directly into the Azure Cloud Shell.
-You will need to run ```az ml folder attach``` once you have created a workspace to generate a new config.json - either delete the empty one or enter in your credentials.
+You will need to run ```az ml folder attach``` once you have created a workspace to generate a new config.json file prior to executing the commands.
