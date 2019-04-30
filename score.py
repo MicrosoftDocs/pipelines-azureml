@@ -1,9 +1,13 @@
 import pickle
 import json
-import numpy
+import numpy as np
 from sklearn.externals import joblib
 from sklearn.linear_model import Ridge
 from azureml.core.model import Model
+
+from inference_schema.schema_decorators import input_schema, output_schema
+from inference_schema.parameter_types.numpy_parameter_type import NumpyParameterType
+
 
 def init():
     global model
@@ -13,11 +17,15 @@ def init():
     # deserialize the model file back into a sklearn model
     model = joblib.load(model_path)
 
-# note you can pass in multiple rows for scoring
-def run(raw_data):
+
+input_sample = np.array([[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]])
+output_sample = np.array([3726.995])
+
+
+@input_schema('data', NumpyParameterType(input_sample))
+@output_schema(NumpyParameterType(output_sample))
+def run(data):
     try:
-        data = json.loads(raw_data)['data']
-        data = numpy.array(data)
         result = model.predict(data)
         # you can return any datatype as long as it is JSON-serializable
         return result.tolist()
