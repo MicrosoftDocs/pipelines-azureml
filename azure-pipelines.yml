@@ -14,11 +14,25 @@ steps:
     inlineScript: 'az extension add -n azure-cli-ml'
 
 - task: AzureCLI@1
+  displayName: 'Set defaults'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az configure --defaults group=myresourcegroup'
+
+- task: AzureCLI@1
   displayName: 'Attach folder to workspace'
   inputs:
     azureSubscription: 'azmldemows'
     scriptLocation: inlineScript
-    inlineScript: 'az ml folder attach'
+    inlineScript: 'az ml folder attach -w myworkspace'
+
+- task: AzureCLI@1
+  displayName: 'Create compute for training'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml computetarget create amlcompute -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4'
   
 - task: AzureCLI@1
   displayName: 'Submit script run'
@@ -32,7 +46,7 @@ steps:
   inputs:
     azureSubscription: 'azmldemows'
     scriptLocation: inlineScript
-    inlineScript: 'az ml model register -n sklearn_regression_model.pkl -p sklearn_regression_model.pkl -t model.json'
+    inlineScript: 'az ml model register -n mymodel -p sklearn_regression_model.pkl -t model.json'
 
 - task: AzureCLI@1
   displayName: 'Deploy model'
@@ -47,3 +61,10 @@ steps:
     azureSubscription: 'azmldemows'
     scriptLocation: inlineScript
     inlineScript: 'az ml service delete -n acicicd'
+
+- task: AzureCLI@1
+  displayName: 'Delete training compute'
+  inputs:
+    azureSubscription: 'azmldemows'
+    scriptLocation: inlineScript
+    inlineScript: 'az ml computetarget delete -n cpu'
