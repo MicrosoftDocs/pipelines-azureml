@@ -2,7 +2,7 @@
     "script": "train.py",
     "framework": "Python",
     "communicator": "None",
-    "target": "cpu",
+    "target": "cpu-cluster",
     "environment": {
         "python": {
             "interpreterPath": "python",
