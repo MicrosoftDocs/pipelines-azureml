@@ -14,18 +14,11 @@ steps:
     inlineScript: 'az extension add -n azure-cli-ml'
 
 - task: AzureCLI@1
-  displayName: 'Set defaults'
-  inputs:
-    azureSubscription: 'azmldemows'
-    scriptLocation: inlineScript
-    inlineScript: 'az configure --defaults group=myresourcegroup'
-
-- task: AzureCLI@1
   displayName: 'Attach folder to workspace'
   inputs:
     azureSubscription: 'azmldemows'
     scriptLocation: inlineScript
-    inlineScript: 'az ml folder attach -w myworkspace'
+    inlineScript: 'az ml folder attach -w myworkspace -g myresourcegroup'
 
 - task: AzureCLI@1
   displayName: 'Create compute for training'
