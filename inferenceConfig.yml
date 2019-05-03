@@ -3,7 +3,7 @@ runtime: python
 condaFile: myenv.yml
 extraDockerfileSteps:
 schemaFile:
-dependencies:
+sourceDirectory:
 enableGpu: False
 baseImage:
 baseImageRegistry:
