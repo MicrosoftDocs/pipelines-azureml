@@ -3,8 +3,7 @@
    "runtime": "python",
    "condaFile": "myenv.yml",
    "extraDockerfileSteps": null,
-   "schemaFile": null,
-   "dependencies": null,
+   "sourceDirectory": null,
    "enableGpu": false,
    "baseImage": null,
    "baseImageRegistry": null
