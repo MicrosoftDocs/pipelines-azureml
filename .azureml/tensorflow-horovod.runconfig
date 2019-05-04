@@ -20,13 +20,8 @@
             }
         },
         "docker": {
-            "baseImage": "mcr.microsoft.com/azureml/base:0.2.2",
-            "enabled": true,
-            "baseImageRegistry":{
-                "address": null,
-                "username": null,
-                "password": null
-            }
+            "baseImage": "mcr.microsoft.com/azureml/base:0.2.4",
+            "enabled": true
         }
     },
     "nodeCount": 2,
