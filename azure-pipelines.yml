@@ -54,10 +54,3 @@ steps:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
     inlineScript: 'az ml service delete -n acicicd'
-
-- task: AzureCLI@1
-  displayName: 'Delete training compute'
-  inputs:
-    azureSubscription: 'azmldemows'
-    scriptLocation: inlineScript
-    inlineScript: 'az ml computetarget delete -n cpu'
