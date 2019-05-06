@@ -4,6 +4,8 @@
 Sample files used to set up an E2E training and deployment pipeline with the Azure ML CLI.
 For more info, please visit https://docs.microsoft.com/azure/machine-learning/service/reference-azure-machine-learning-cli
 
+Install the Machine Learning DevOps extension in your project here https://marketplace.visualstudio.com/items?itemName=ms-air-aiagility.vss-services-azureml to scope your project to your Azure Machine Learning service workspace. 
+
 # How to use
 
 This example requires familiarity with Azure Pipelines. For more information, see [https://docs.microsoft.com/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=tfs-2018-2](https://docs.microsoft.com/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=tfs-2018-2).
