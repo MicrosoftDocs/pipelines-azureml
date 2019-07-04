@@ -18,7 +18,7 @@ steps:
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml folder attach -w build-2019-demo -g scottgu-all-hands'
+    inlineScript: 'az ml folder attach -w myworkspace -g myresourcegroup'
 
 - task: AzureCLI@1
   displayName: 'Create compute for training'
