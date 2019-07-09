@@ -25,7 +25,7 @@ steps:
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml computetarget create amlcompute -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4'
+    inlineScript: 'az ml computetarget create amlcompute -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4 -w myworkspace -g myresourcegroup'
   
 - task: AzureCLI@1
   displayName: 'Submit script run'
