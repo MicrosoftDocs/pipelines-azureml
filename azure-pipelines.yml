@@ -25,32 +25,32 @@ steps:
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml computetarget create amlcompute -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4'
+    inlineScript: 'az ml computetarget create amlcompute -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4 -w myworkspace -g myresourcegroup'
   
 - task: AzureCLI@1
   displayName: 'Submit script run'
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml run submit-script -c sklearn -e test -d myenv.yml train.py'
+    inlineScript: 'az ml run submit-script -c sklearn -e test -d myenv.yml train.py -w myworkspace -g myresourcegroup'
 
 - task: AzureCLI@1
   displayName: 'Register model'
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml model register -n mymodel -p sklearn_regression_model.pkl -t model.json'
+    inlineScript: 'az ml model register -n mymodel -p sklearn_regression_model.pkl -t model.json -w myworkspace -g myresourcegroup'
 
 - task: AzureCLI@1
   displayName: 'Deploy model'
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml model deploy -n acicicd -f model.json --ic inferenceConfig.yml --dc deploymentConfig.yml --overwrite'
+    inlineScript: 'az ml model deploy -n acicicd -f model.json --ic inferenceConfig.yml --dc deploymentConfig.yml --overwrite -w myworkspace -g myresourcegroup'
 
 - task: AzureCLI@1
   displayName: 'Delete deployed service'
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml service delete -n acicicd'
+    inlineScript: 'az ml service delete -n acicicd -w myworkspace -g myresourcegroup'
