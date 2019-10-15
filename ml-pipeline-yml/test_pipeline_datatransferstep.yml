@@ -1,0 +1,30 @@
+pipeline:
+    name: SamplePipelineFromYaml
+    parameters:
+        PipelineParam1:
+            type: int
+            default: 3
+    data_references:
+        adls_test_data:
+            datastore: adftestadla
+            path_on_datastore: "testdata"
+        blob_test_data:
+            datastore: workspaceblobstore
+            path_on_datastore: "testdata"
+    default_compute: adftest
+    steps:
+        Step1:
+            runconfig: "yaml/default_runconfig.yml"
+            parameters:
+                NUM_ITERATIONS_2:
+                    source: PipelineParam1
+                NUM_ITERATIONS_1: 7
+            data_transfer_step:
+                name: "DataTransferStep"
+                adla_compute_name: adftest
+            source_data_reference:
+                adls_test_data:
+                    source: adls_test_data
+            destination_data_reference:
+                blob_test_data:
+                    source: blob_test_data

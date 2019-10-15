@@ -1,0 +1,36 @@
+pipeline:
+    name: SamplePipelineFromYaml
+    parameters:
+        PipelineParam1:
+            type: int
+            default: 3
+    data_references:
+        adls_test_data:
+            datastore: adftestadla
+            path_on_datastore: "testdata"
+        blob_test_data:
+            datastore: workspaceblobstore
+            path_on_datastore: "dbtest"
+    default_compute: alondb
+    steps:
+        Step1:
+            runconfig: "D:\\AzureMlCli\\cli_testing\\default_runconfig.yml"
+            parameters:
+                NUM_ITERATIONS_2:
+                    source: PipelineParam1
+                NUM_ITERATIONS_1: 7
+            databricks_step:
+                name: "Databrickstep"
+                run_name: "DatabrickRun"
+                python_script_name: "train-db-local.py"
+                source_directory: "D:\\AzureMlCli\\cli_testing\\databricks_train"
+                num_workers: 1
+                allow_reuse: true
+            inputs:
+                blob_test_data:
+                    source: blob_test_data
+            outputs:
+                OutputData:
+                    destination: Output4
+                    datastore: workspaceblobstore
+                    type: mount

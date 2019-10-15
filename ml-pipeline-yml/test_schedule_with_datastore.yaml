@@ -1,0 +1,11 @@
+Schedule:
+      description: "Test create with datastore"
+      recurrence: ~
+      pipeline_parameters: {}
+      wait_for_provisioning: True
+      wait_timeout: 3600
+      datastore_name: "workspaceblobstore"
+      polling_interval: 5
+      data_path_parameter_name: "input_data"
+      continue_on_step_failure: None
+      path_on_datastore: "file/path"

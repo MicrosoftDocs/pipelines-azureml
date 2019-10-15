@@ -1,0 +1,30 @@
+pipeline:
+    name: SamplePipelineFromYaml
+    parameters:
+        PipelineParam1:
+            type: int
+            default: 3
+    data_references:
+        employee_data:
+            datastore: adftestadla
+            path_on_datastore: "adla_sample/sample_input.csv"
+    default_compute: adlacomp
+    steps:
+        Step1:
+            runconfig: "yaml/default_runconfig.yml"
+            parameters:
+                NUM_ITERATIONS_2:
+                    source: PipelineParam1
+                NUM_ITERATIONS_1: 7
+            adla_step:
+                name: "AdlaStep"
+                script_name: "sample_script.usql"
+                source_directory: "helloworld"
+            inputs:
+                employee_data:
+                    source: employee_data
+            outputs:
+                OutputData:
+                    destination: Output4
+                    datastore: adftestadla
+                    type: mount

@@ -1,0 +1,90 @@
+pipeline:
+    name: MyPipeline
+    parameters: #literal parameters
+        PipelineParam1:
+            type: int
+            default: 3
+        MyDataParam:
+            type: datapath
+            default:
+                datastore: workspaceblobstore
+                name: defaultdatapath
+                path_on_datastore: azureml/b52eaf8b-e6c3-471a-b1ac-edf769457b30/output
+        node_count_graph_param:
+            type: int
+            default: 4
+    data_references:
+        DataPath1:
+            datastore: workspaceblobstore
+            path_on_datastore: azureml/f4cd79f1-d88a-4017-bda9-ef335553f695/output
+        SQLData1:
+            datastore: sqldatastore
+            sql_table: table1
+            sql_query: "SELECT * FROM testtable"
+            sql_stored_procedure: procedure1
+            sql_stored_procedure_params:
+                Param1:
+                    value: 12
+                    type: Int
+                Param2:
+                    value: value1
+                    type: String
+                Param3:
+                    value: value2
+    default_compute: amlalexka # use this compute for step, unless it's customized
+    steps:
+        Step1:
+            module:
+                name: "TestModuleName"
+            compute: amlalexka2
+            runconfig: "yaml/default_runconfig.yml"
+            arguments:
+            - "--input"
+            - input:InputData
+            - "--output"
+            - output:OutputData
+            - "--param"
+            - parameter:my_parameter
+            parameters:
+                my_parameter:
+                    source: PipelineParam1
+            runconfig_parameters:
+                NodeCount:
+                    source: node_count_graph_param
+            inputs:
+                InputData:
+                    source: MyDataParam
+                    type: mount
+            outputs:
+                OutputData:
+                    destination: KindOfPipelineData1
+                    datastore: workspaceblobstore
+                    type: upload
+                    path_on_compute: "path"
+                    overwrite: true
+        Step2:
+            module:
+                name: "TestModuleName"
+                version: "1"
+            parameters:
+                my_parameter: "yaml_submitted_value_step2"
+            arguments:
+            - "--input"
+            - input:InputData
+            inputs:
+                InputData:
+                    source: KindOfPipelineData1
+                    type: download
+                    path_on_compute: "path1"
+                    overwrite: false
+        Step3:
+            module:
+                name: "TestModuleTwoInputs"
+            arguments:
+            - "--input"
+            inputs:
+                InputData1:
+                    source: SQLData1
+                InputData2:
+                    source: DataPath1
+                    type: download

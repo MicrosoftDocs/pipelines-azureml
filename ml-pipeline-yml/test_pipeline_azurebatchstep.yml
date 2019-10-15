@@ -1,0 +1,32 @@
+pipeline:
+    name: SamplePipelineFromYaml
+    parameters:
+        PipelineParam1:
+            type: int
+            default: 3
+    data_references:
+        input:
+            datastore: workspaceblobstore
+            path_on_datastore: "input.txt"
+    default_compute: testbatch
+    steps:
+        Step1:
+            runconfig: "D:\\AzureMlCli\\cli_testing\\default_runconfig.yml"
+            parameters:
+                NUM_ITERATIONS_2:
+                    source: PipelineParam1
+                NUM_ITERATIONS_1: 7
+            azurebatch_step:
+                name: "AzureBatchStep"
+                pool_id: "MyPoolName"
+                create_pool: true
+                executable: "azurebatch.cmd"
+                source_directory: "D:\\AzureMlCli\\cli_testing"
+                allow_reuse: false
+            inputs:
+                input:
+                    source: input
+            outputs:
+                output:
+                    destination: output
+                    datastore: workspaceblobstore

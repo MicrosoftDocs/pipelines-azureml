@@ -1,0 +1,31 @@
+pipeline:
+    name: SamplePipelineFromYaml
+    parameters:
+        PipelineParam1:
+            type: int
+            default: 3
+    data_references:
+        DataReference1:
+            datastore: workspaceblobstore
+            path_on_datastore: testfolder/sample.txt
+    default_compute: cpu-cluster
+    steps:
+        Step1:
+            runconfig: "yaml/default_runconfig.yml"
+            parameters:
+                NUM_ITERATIONS_2:
+                    source: PipelineParam1
+                NUM_ITERATIONS_1: 7
+            python_script_step:
+                name: "PythonScriptStep"
+                script_name: "train.py"
+                allow_reuse: True
+                source_directory: "helloworld"
+            inputs:
+                InputData:
+                    source: DataReference1
+            outputs:
+                OutputData:
+                    destination: Output4
+                    datastore: workspaceblobstore
+                    type: mount

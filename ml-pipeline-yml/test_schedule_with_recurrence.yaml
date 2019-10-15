@@ -1,0 +1,23 @@
+Schedule:
+      description: "Test create with recurrence"
+      recurrence:
+            frequency: Week # Can be "Minute", "Hour", "Day", "Week", or "Month".
+            interval: 1 # how often fires
+            start_time: 2019-06-07T10:50:00
+            time_zone: UTC
+            hours:
+            - 1
+            minutes:
+            - 0
+            time_of_day: null
+            week_days:
+            - Friday
+      pipeline_parameters:
+        'a': 1
+      wait_for_provisioning: True
+      wait_timeout: 3600
+      datastore_name: ~
+      polling_interval: ~
+      data_path_parameter_name: ~
+      continue_on_step_failure: None
+      path_on_datastore: ~

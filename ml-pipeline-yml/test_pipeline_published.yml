@@ -1,0 +1,75 @@
+pipeline:
+    name: MyPipeline
+    parameters: #literal parameters
+        PipelineParam1:
+            type: int
+            default: 3
+    data_references:
+        DataPath1:
+            datastore: workspaceblobstore
+            path_on_datastore: azureml/f4cd79f1-d88a-4017-bda9-ef335553f695/output
+        SQLData1:
+            datastore: sqldatastore
+            sql_table: table1
+            sql_query: "SELECT * FROM testtable"
+            sql_stored_procedure: procedure1
+            sql_stored_procedure_params:
+                Param1:
+                    value: 12
+                    type: Int
+                Param2:
+                    value: value1
+                    type: String
+                Param3:
+                    value: value2
+    default_compute: amlalexka # use this compute for step, unless it's customized
+    steps:
+        Step1:
+            module:
+                name: "TestModuleName"
+            compute: amlalexka2
+            runconfig: "yaml/default_runconfig.yml"
+            arguments:
+            - "--input"
+            - input:InputData
+            - "--output"
+            - output:OutputData
+            - "--param"
+            - parameter:my_parameter
+            parameters:
+                my_parameter:
+                    source: PipelineParam1
+            inputs:
+                InputData:
+                    source: DataPath1
+                    type: mount
+            outputs:
+                OutputData:
+                    destination: KindOfPipelineData1
+                    datastore: workspaceblobstore
+                    type: mount
+        Step2:
+            module:
+                name: "TestModuleName"
+                version: "1"
+            arguments:
+            - "--input"
+            - "--output"
+            parameters:
+                my_parameter: "yaml_submitted_value_step2"
+            inputs:
+                InputData:
+                    source: KindOfPipelineData1
+                    type: mount
+        Step3:
+            module:
+                name: "TestModuleTwoInputs"
+            arguments:
+            - "--input"
+            - "--output"
+            inputs:
+                InputData1:
+                    source: SQLData1
+                InputData2:
+                    source: DataPath1
+                    type: download
