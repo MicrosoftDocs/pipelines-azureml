@@ -18,7 +18,7 @@ steps:
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml folder attach -w TF-WS -g TF-Pipe'
+    inlineScript: 'az ml folder attach -w AMLPipeWS -g AMLPipeRG'
 
 - task: AzureCLI@1
   displayName: 'Create compute for training'
