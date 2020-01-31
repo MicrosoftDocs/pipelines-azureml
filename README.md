@@ -6,7 +6,7 @@ Install the Machine Learning DevOps extension in your project here https://marke
 
 # How to use
 
-This example requires familiarity with Azure Pipelines. For more information, see [https://docs.microsoft.com/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=tfs-2018-2](https://docs.microsoft.com/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=tfs-2018-2).
+This example requires familiarity with Azure Pipelines or GitHub Actions. For more information, see [https://docs.microsoft.com/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=tfs-2018-2](https://docs.microsoft.com/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=tfs-2018-2).
 
 This example also requires an Azure Machine Learning service workspace. For more information, see [https://docs.microsoft.com/azure/machine-learning/service/setup-create-workspace](https://docs.microsoft.com/azure/machine-learning/service/setup-create-workspace).
 
