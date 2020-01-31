@@ -1,0 +1,44 @@
+name: Python application
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check Out Repository
+      uses: actions/checkout@master
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: install azmlcli
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: 'az extension add -n azure-cli-ml'
+    - name: attach to workspace
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: 'az ml folder attach -w myworkspace -g myresourcegroup'
+    - name: create remote compute
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: 'az ml computetarget create amlcompute -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4'
+    - name: train model
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: 'az ml run submit-script -c sklearn -e test -d myenv.yml train.py'
+    - name: register model
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: 'az ml model register -n mymodel -p sklearn_regression_model.pkl -t model.json'
+    - name: install azmlcli
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: 'az ml model deploy -n acicicd -f model.json --ic inferenceConfig.yml --dc deploymentConfig.yml --overwrite'
+    - name: delete created service
+      uses: Azure/cli@v1.0.0
+      with:
+        inlineScript: 'az ml service delete -n acicicd'
