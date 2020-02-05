@@ -1,5 +1,5 @@
 # Introduction 
-Sample files used to set up an E2E training and deployment pipeline with the Azure ML CLI.
+Sample files used to set up an E2E training and deployment pipeline with the Azure Machine Learning CLI.
 For more info, please visit https://docs.microsoft.com/azure/machine-learning/service/reference-azure-machine-learning-cli
 
 Install the Machine Learning DevOps extension in your project here https://marketplace.visualstudio.com/items?itemName=ms-air-aiagility.vss-services-azureml to scope your project to your Azure Machine Learning service workspace. 
