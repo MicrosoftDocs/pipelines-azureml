@@ -1,6 +1,5 @@
 script: train.py
-framework: Python
-communicator: None
+command: python
 target: mycompute
 environment:
   python:
@@ -20,3 +19,4 @@ environment:
       username: 
       password: 
 nodeCount: 1
+communicator: None
