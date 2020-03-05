@@ -14,7 +14,7 @@ environment:
   python:
     userManagedDependencies: false
     interpreterPath: python
-    condaDependenciesFile: train-conda.yml
+    condaDependenciesFile: config/train-conda.yml
     baseCondaEnvironment: 
   docker:
     enabled: true

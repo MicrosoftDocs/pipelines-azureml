@@ -1,6 +1,6 @@
 entryScript: score.py
 runtime: python
-condaFile: inference-conda.yml
+condaFile: config/inference-conda.yml
 extraDockerfileSteps:
 schemaFile:
 sourceDirectory:
