@@ -14,14 +14,14 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- task: AzureCLI@1
-  displayName: 'Install the AML CLI'
+- task: AzureCLI@2
+  displayName: 'Install AML CLI'
   inputs:
     azureSubscription: $(ml-ws-connection)
     scriptLocation: inlineScript
     inlineScript: 'az extension add -n azure-cli-ml'
 
-- task: AzureCLI@1
+- task: AzureCLI@2
   displayName: 'Attach folder to workspace'
   inputs:
     azureSubscription: $(ml-ws-connection)
@@ -29,7 +29,7 @@ steps:
     scriptLocation: inlineScript
     inlineScript: 'az ml folder attach -w $(ml-ws) -g $(ml-rg)'
 
-- task: AzureCLI@1
+- task: AzureCLI@2
   displayName: 'Create compute for training'
   inputs:
     azureSubscription: $(ml-ws-connection)
@@ -37,17 +37,17 @@ steps:
     scriptLocation: inlineScript
     inlineScript: 'az ml computetarget create amlcompute -n $(ml-ct) --vm-size STANDARD_D2_V2 --max-nodes 1'
   
-- task: AzureCLI@1
-  displayName: 'Submit script run'
+- task: AzureCLI@2
+  displayName: 'Train model'
   inputs:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
-    inlineScript: 'az ml run submit-script -c train --ct $(ml-ct) -e $(ml-exp) -t run.json train.py'
+    inlineScript: 'az ml run submit-script -c config/train --ct $(ml-ct) -e $(ml-exp) -t run.json train.py'
 
 # Add potential approval step before registration of model
 
-- task: AzureCLI@1
+- task: AzureCLI@2
   displayName: 'Register model'
   inputs:
     azureSubscription: $(ml-ws-connection)
@@ -55,7 +55,7 @@ steps:
     scriptLocation: inlineScript
     inlineScript: 'az ml model register -n $(ml-model-name) -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
 
-- task: AzureCLI@1
+- task: AzureCLI@2
   displayName: 'Deploy model to ACI for QA'
   inputs:
     azureSubscription: $(ml-ws-connection)
@@ -65,7 +65,7 @@ steps:
 
 # Add potential automated tests
 
-#- task: AzureCLI@1
+#- task: AzureCLI@2
 #  displayName: 'Delete deployed service'
 #  inputs:
 #    azureSubscription: $(ml-ws-connection)
