@@ -19,6 +19,7 @@ steps:
   inputs:
     azureSubscription: $(ml-ws-connection)
     scriptLocation: inlineScript
+    scriptType: 'bash'
     inlineScript: 'az extension add -n azure-cli-ml'
 
 - task: AzureCLI@2
@@ -27,6 +28,7 @@ steps:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
+    scriptType: 'bash'
     inlineScript: 'az ml folder attach -w $(ml-ws) -g $(ml-rg)'
 
 - task: AzureCLI@2
@@ -35,6 +37,7 @@ steps:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
+    scriptType: 'bash'
     inlineScript: 'az ml computetarget create amlcompute -n $(ml-ct) --vm-size STANDARD_D2_V2 --max-nodes 1'
   
 - task: AzureCLI@2
@@ -43,6 +46,7 @@ steps:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
+    scriptType: 'bash'
     inlineScript: 'az ml run submit-script -c config/train --ct $(ml-ct) -e $(ml-exp) -t run.json train.py'
 
 # Add potential approval step before registration of model
@@ -53,6 +57,7 @@ steps:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
+    scriptType: 'bash'
     inlineScript: 'az ml model register -n $(ml-model-name) -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
 
 - task: AzureCLI@2
@@ -61,6 +66,7 @@ steps:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
+    scriptType: 'bash'
     inlineScript: 'az ml model deploy -n diabetes-qa-aci -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
 
 # Add potential automated tests
@@ -71,4 +77,5 @@ steps:
 #    azureSubscription: $(ml-ws-connection)
 #    workingDirectory: $(ml-path)
 #    scriptLocation: inlineScript
+#    scriptType: 'bash'
 #    inlineScript: 'az ml service delete -n acicicd'
