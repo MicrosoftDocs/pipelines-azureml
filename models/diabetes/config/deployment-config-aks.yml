@@ -13,6 +13,6 @@ containerResourceRequirements:
 
 sslEnabled: False
 authEnabled: True
-appInsightsEnabled: False
+appInsightsEnabled: True
 maxQueueWaitMs: 500
 scoringTimeoutMs: 5000

@@ -6,6 +6,7 @@ variables:
   ml-path: 'models/diabetes' # Model directory path in repo
   ml-exp: 'exp-test' # Experiment name
   ml-model-name: 'diabetes-model' # Model name
+  ml-aks-name: 'aks-prod' # AKS cluster name
 
 trigger:
 - master
@@ -71,6 +72,24 @@ steps:
 
 # Add potential automated tests
 
+- task: AzureCLI@2
+  displayName: 'Create AKS cluster'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --cluster-purpose DevTest'
+
+- task: AzureCLI@2
+  displayName: 'Deploy model to AKS for Production'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
+
 #- task: AzureCLI@2
 #  displayName: 'Delete deployed service'
 #  inputs:
@@ -78,4 +97,4 @@ steps:
 #    workingDirectory: $(ml-path)
 #    scriptLocation: inlineScript
 #    scriptType: 'bash'
-#    inlineScript: 'az ml service delete -n acicicd'
+#    inlineScript: 'az ml service delete -n diabetes-qa-aci'
