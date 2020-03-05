@@ -43,7 +43,7 @@ steps:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
-    inlineScript: 'az ml run submit-script -c sklearn --ct $(ml-ct) -e $(ml-exp) -t run.json train.py'
+    inlineScript: 'az ml run submit-script -c train --ct $(ml-ct) -e $(ml-exp) -t run.json train.py'
 
 # Add potential approval step before registration of model
 
@@ -61,7 +61,7 @@ steps:
     azureSubscription: $(ml-ws-connection)
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
-    inlineScript: 'az ml model deploy -n diabetes-qa-aci -f model.json --ic inferenceConfig.yml --dc deploymentConfig.yml --overwrite'
+    inlineScript: 'az ml model deploy -n diabetes-qa-aci -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
 
 # Add potential automated tests
 

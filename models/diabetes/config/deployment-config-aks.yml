@@ -14,6 +14,5 @@ containerResourceRequirements:
 sslEnabled: False
 authEnabled: True
 appInsightsEnabled: False
-maxQueueWaitMs: 1000
-scoringTimeoutMs: 1000
-maxConcurrentRequestsPerContainer: 1
+maxQueueWaitMs: 500
+scoringTimeoutMs: 5000
