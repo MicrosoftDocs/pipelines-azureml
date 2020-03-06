@@ -3,14 +3,14 @@ name: Python application
 on: [push]
 
 env:
-  ml-ws-connection: 'azmldemows' # Workspace Service Connection name
-  ml-ws: 'aml-demo' # AML Workspace name
-  ml-rg: 'aml-demo' # AML resource Group name
-  ml-ct: 'cpu-cluster-1' # AML Compute cluster name
-  ml-path: 'models/diabetes' # Model directory path in repo
-  ml-exp: 'exp-test' # Experiment name
-  ml-model-name: 'diabetes-model' # Model name
-  ml-aks-name: 'aks-prod' # AKS cluster name
+  ml-ws-connection: azmldemows
+  ml-ws: aml-demo
+  ml-rg: aml-demo
+  ml-ct: cpu-cluster-1
+  ml-path: models/diabetes
+  ml-exp: exp-test 
+  ml-model-name: diabetes-model # Model name
+  ml-aks-name: aks-prod # AKS cluster name
 jobs:
   build:
     runs-on: ubuntu-latest
