@@ -15,6 +15,6 @@ You can clone/fork this repo and use it with Azure Pipelines. Before creating th
 1. Create a new project in Azure DevOps/Pipelines
 1. Goto `Project settings`, select `Service connections`, create a new connection of type `Azure Resource Manager`, select `Service principal (automatic)` and configure it to the `Machine Learning Workspace`. Name it `azmldemows` and point it to your Azure Machine Learning workspace (see [here](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops) for more details)
 1. Modify the `pipelines/diabetes-train-and-deploy.yml` and change the `ml-rg` variable to the Azure resource group that contains your workspace. You must also change the `ml-ws` variable to the name of your Azure Machine Learning service workspace.
-![](docs/service_connection.png)
+<img src="docs/service_connection.png" width="250px" />
 1. When creating the pipeline for the project, you can point it to the `pipelines/diabetes-train-and-deploy.yml` file. This defines an example pipeline.
 
