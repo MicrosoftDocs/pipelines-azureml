@@ -4,6 +4,30 @@ This repo shows an E2E training and deployment pipeline with Azure Machine Learn
 
 Install the Machine Learning DevOps extension in your project [from here](https://marketplace.visualstudio.com/items?itemName=ms-air-aiagility.vss-services-azureml) to scope your project to your Azure Machine Learning service workspace. 
 
+# How it works
+
+## Declare variables for CI/CD pipeline
+ - ml-ws-connection: 'azmldemows' # Workspace Service Connection name
+ - ml-ws: 'aml-demo' # AML Workspace name
+ - ml-rg: 'aml-demo' # AML resource Group name
+ - ml-ct: 'cpu-cluster-1' # AML Compute cluster name
+ - ml-path: 'models/diabetes' # Model directory path in repo
+ - ml-exp: 'exp-test' # Experiment name
+ - ml-model-name: 'diabetes-model' # Model name
+ - ml-aks-name: 'aks-prod' # AKS cluster name
+
+## Run CLI scripts to create training compute, train model, register model, deploy model
+```cli
+    inlineScript: 'az extension add -n azure-cli-ml'
+    inlineScript: 'az ml folder attach -w $(ml-ws) -g $(ml-rg)'
+    inlineScript: 'az ml computetarget create amlcompute -n $(ml-ct) --vm-size STANDARD_D2_V2 --max-nodes 1'
+    inlineScript: 'az ml run submit-script -c config/train --ct $(ml-ct) -e $(ml-exp) -t run.json train.py'
+    inlineScript: 'az ml model register -n $(ml-model-name) -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
+    inlineScript: 'az ml model deploy -n diabetes-qa-aci -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
+    inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --cluster-purpose DevTest'
+    inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
+```
+
 # How to use
 
 This example requires familiarity with Azure Pipelines or GitHub Actions. For more information, see [this link](https://docs.microsoft.com/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=tfs-2018-2).
