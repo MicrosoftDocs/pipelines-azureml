@@ -1,0 +1,38 @@
+script: train.py
+arguments: []
+target:
+framework: Python
+communicator: None
+autoPrepareEnvironment: true
+maxRunDurationSeconds: 
+nodeCount: 1
+environment:
+  name: 
+  version: 
+  environmentVariables:
+    EXAMPLE_ENV_VAR: EXAMPLE_VALUE
+  python:
+    userManagedDependencies: false
+    interpreterPath: python
+    condaDependenciesFile: config/train-conda.yml
+    baseCondaEnvironment: 
+  docker:
+    enabled: true
+    baseImage: mcr.microsoft.com/azureml/base:0.2.4
+    sharedVolumes: true
+    gpuSupport: false
+    shmSize: 1g
+    arguments: []
+    baseImageRegistry:
+      address: 
+      username: 
+      password: 
+history:
+  outputCollection: true
+  snapshotProject: true
+  directoriesToWatch:
+  - logs
+mpi:
+  processCountPerNode: 1
+dataReferences: {}
+sourceDirectoryDataStore: 

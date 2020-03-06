@@ -1,0 +1,4 @@
+containerResourceRequirements:
+  cpu: 1
+  memoryInGB: 0.5
+computeType: ACI

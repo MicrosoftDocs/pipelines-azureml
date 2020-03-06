@@ -1,0 +1,100 @@
+variables:
+  ml-ws-connection: 'azmldemows' # Workspace Service Connection name
+  ml-ws: 'aml-demo' # AML Workspace name
+  ml-rg: 'aml-demo' # AML resource Group name
+  ml-ct: 'cpu-cluster-1' # AML Compute cluster name
+  ml-path: 'models/diabetes' # Model directory path in repo
+  ml-exp: 'exp-test' # Experiment name
+  ml-model-name: 'diabetes-model' # Model name
+  ml-aks-name: 'aks-prod' # AKS cluster name
+
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- task: AzureCLI@2
+  displayName: 'Install AML CLI'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az extension add -n azure-cli-ml'
+
+- task: AzureCLI@2
+  displayName: 'Attach folder to workspace'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml folder attach -w $(ml-ws) -g $(ml-rg)'
+
+- task: AzureCLI@2
+  displayName: 'Create compute for training'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml computetarget create amlcompute -n $(ml-ct) --vm-size STANDARD_D2_V2 --max-nodes 1'
+  
+- task: AzureCLI@2
+  displayName: 'Train model'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml run submit-script -c config/train --ct $(ml-ct) -e $(ml-exp) -t run.json train.py'
+
+# Add potential approval step before registration of model
+
+- task: AzureCLI@2
+  displayName: 'Register model'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml model register -n $(ml-model-name) -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
+
+- task: AzureCLI@2
+  displayName: 'Deploy model to ACI for QA'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml model deploy -n diabetes-qa-aci -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
+
+# Add potential automated tests
+
+- task: AzureCLI@2
+  displayName: 'Create AKS cluster'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --cluster-purpose DevTest'
+
+- task: AzureCLI@2
+  displayName: 'Deploy model to AKS for Production'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
+
+#- task: AzureCLI@2
+#  displayName: 'Delete deployed service'
+#  inputs:
+#    azureSubscription: $(ml-ws-connection)
+#    workingDirectory: $(ml-path)
+#    scriptLocation: inlineScript
+#    scriptType: 'bash'
+#    inlineScript: 'az ml service delete -n diabetes-qa-aci'
