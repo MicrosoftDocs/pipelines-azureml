@@ -35,7 +35,7 @@ jobs:
       run: az ml run submit-script -c config/train --ct ${{env.ml-ct}} -e ${{env.ml-exp}} -t run.json
     - name: register model
       working-directory: models/diabetes
-      run: az ml model register -n ${{ml-model-name}} -f run.json --asset-path ${{ml-model-path}} -t model.json
+      run: az ml model register -n ${{env.ml-model-name}} -f run.json --asset-path ${{env.ml-model-path}} -t model.json
     - name: install azmlcli
       working-directory: models/diabetes
       run: az ml model deploy -n acicicd -f model.json --ic inferenceConfig.yml --dc deploymentConfig.yml --overwrite
