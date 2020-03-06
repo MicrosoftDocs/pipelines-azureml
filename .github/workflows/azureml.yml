@@ -31,7 +31,7 @@ jobs:
       run: az ml computetarget create amlcompute -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4
     - name: train model
       working-directory: models/diabetes
-      run: az ml run submit-script -c config/train --ct $(ml-ct) -e $(ml-exp) -t run.json train.py
+      run: az ml run submit-script -c config/train --ct $ml-ct -e $ml-exp -t run.json train.py
     - name: register model
       working-directory: models/diabetes
       run: az ml model register -n mymodel -p sklearn_regression_model.pkl -t model.json
