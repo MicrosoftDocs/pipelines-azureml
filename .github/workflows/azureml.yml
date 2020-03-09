@@ -29,16 +29,16 @@ jobs:
       run: az ml folder attach -w myworkspace -g myresourcegroup
     - name: create remote compute
       working-directory: models/diabetes
-      run: az ml computetarget create amlcompute -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4
+      run: az ml computetarget create amlcompute -n ${{env.ml-ct}} --vm-size STANDARD_D2_V2 --max-nodes 4
     - name: train model
       working-directory: models/diabetes
       run: az ml run submit-script -c config/train --ct ${{env.ml-ct}} -e ${{env.ml-exp}} -t run.json
     - name: register model
       working-directory: models/diabetes
       run: az ml model register -n ${{env.ml-model-name}} -f run.json --asset-path ${{env.ml-model-path}} -t model.json
-    - name: install azmlcli
+    - name: deploy to ACI
       working-directory: models/diabetes
-      run: az ml model deploy -n acicicd -f model.json --ic inferenceConfig.yml --dc deploymentConfig.yml --overwrite
+      run: az ml model deploy -n acicicd -f model.json --ic config/inference-config.yml --dc config/deployment-config.yml --overwrite
     - name: delete created service
       working-directory: models/diabetes
       run: az ml service delete -n acicicd
