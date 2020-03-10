@@ -5,19 +5,30 @@ This tutorial covers:
 * Creating an Azure Machine Learning workspace in Azure
 * Setup on an end-to-end demo pipeline in Azure DevOps
 
+## Fork the repo
+
+Before you get started, fork this repository into your own GitHub account:
+<img src="fork_repo.png" width="750px" />
+
+This will allow you to experiment and make changes to it.
+
 ## Create an Azure Machine Learning workspace
 
-Create a new Machine Learning Workspace by clicking [here](https://ms.portal.azure.com/#create/Microsoft.MachineLearningServices). This link brings you directly to the creation page in the Azure Portal:
+Next, create a new Machine Learning Workspace by clicking [here](https://ms.portal.azure.com/#create/Microsoft.MachineLearningServices). This link brings you directly to the creation page in the Azure Portal:
 
 <img src="create_workspace.png" width="750px" />
 
 This repo uses `aml-demo` as the workspace and reosurce group name. Feel free to pick a region of your choice and select `Enterprise Edition` (`Basic` should work too, but has not been tested). CLick `Review + Create` and finally `Create`.
 
-
 ## Create and setup a new project in Azure DevOps
 
-Navigate to [Azure DevOps](https://dev.azure.com/) and sign-in. From there create a new project and give it a name: 
+Navigate to [Azure DevOps](https://dev.azure.com/) and sign-in. In case you are using Azure DevOps for the very first time, you might be asked to create a new organization. Feel free to choose any name:
 
+<img src="create_organization.png" width="750px" />
+
+Once created, you can create a new project and give it a name:
+
+<img src="create_project.png" width="750px" />
 
 Next, you need to connect Azure DevOps to your Azure Subscription, to be more precise, to your Machine Learning workspace's resource group. For this, go to the `Project Settings` and select `Service Connections`:
 
@@ -41,7 +52,7 @@ Next, select `Pipelines` and create a new pipeline. Select that you want to acce
 
 **Note:** At this point, you might need to link your GitHub account to Azure DevOps (not shown here).
 
-Select the repository fork you've selected earlier:
+Select the repository fork you've forked earlier (this should show as `<your github username>/pipelines-azureml`):
 
 <img src="select_repo.png" width="750px" />
 
