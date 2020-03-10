@@ -36,6 +36,8 @@ Next, you need to connect Azure DevOps to your Azure Subscription, to be more pr
 
 From there, create a new Service Connection of type `Azure Resource Manager`:
 
+**Note:** In case your UI looks different, scroll down two images
+
 <img src="create_service_connection.png" width="750px" />
 
 Lastly, give it a name (this repo uses `azmldemows` as default), and enter the details of your Resource
@@ -43,6 +45,14 @@ Lastly, give it a name (this repo uses `azmldemows` as default), and enter the d
 <img src="create_connection.png" width="750px" />
 
 **Note:** If you want to limit Azure DevOps's access to only the Machine Learning workspace, you can install the [Azure DevOps Machine Learning Extension](https://marketplace.visualstudio.com/items?itemName=ms-air-aiagility.vss-services-azureml) to your project. In this case, you'll be able to select the Machine Learning workspace.
+
+**Note:** In some cases, your Azure DevOps UI might look a bit different:
+
+<img src="alternative_create_connection.png" width="700px" />
+
+In this case, you can point it directly to your newly created Machine Learning workspace:
+
+<img src="alternative_configure_connection.png" width="700px" />
 
 ## Import existing YAML pipeline to Azure DevOps
 
