@@ -1,9 +1,6 @@
 script: train.py
 arguments: []
-target: cpu
 framework: Python
-communicator: None
-nodeCount: 1
 environment:
   python:
     userManagedDependencies: false
