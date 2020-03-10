@@ -38,4 +38,4 @@ jobs:
       run: az ml model register -n ${{env.ml-model-name}} -f run.json --asset-path ${{env.ml-model-path}} -t model.json
     - name: deploy model to ACI
       working-directory: ${{env.ml-path}}
-      run: az ml model deploy -n acicicd -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite
+      run: az ml model deploy -n acicicd2 -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite
