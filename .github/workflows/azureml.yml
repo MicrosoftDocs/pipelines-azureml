@@ -11,7 +11,7 @@ env:
   ml-exp: exp-test 
   ml-model-name: github-diabetes-model # Model name
   ml-aks-name: aks-prod # AKS cluster name
-  ml-model-path: outputs/ridge_0.95.pkl 
+  ml-model-path: outputs/ridge_0.90.pkl 
 jobs:
   build:
     runs-on: ubuntu-latest
