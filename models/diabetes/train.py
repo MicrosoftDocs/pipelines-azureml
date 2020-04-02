@@ -1,15 +1,16 @@
 # Copyright (c) Microsoft. All rights reserved.
 # Licensed under the MIT license.
 
+import pickle
+import os
+import numpy as np
 from sklearn.datasets import load_diabetes
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 from azureml.core.run import Run
-import pickle
-import os
-import numpy as np
-import mylib
+
+from utils import mylib
 
 os.makedirs('./outputs', exist_ok=True)
 
@@ -36,7 +37,7 @@ for alpha in alphas:
     run.log('alpha', alpha)
     run.log('mse', mse)
 
-    # save model in the outputs folder so it automatically get uploaded
+    # Save model in the outputs folder so it automatically get uploaded when running on AML Compute
     model_file_name = 'ridge_{0:.2f}.pkl'.format(alpha)
     with open(os.path.join('./outputs/', model_file_name), 'wb') as file:
         pickle.dump(reg, file)
