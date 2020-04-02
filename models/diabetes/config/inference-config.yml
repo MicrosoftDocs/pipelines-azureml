@@ -3,7 +3,7 @@ runtime: python
 condaFile: config/inference-conda.yml
 extraDockerfileSteps:
 schemaFile:
-sourceDirectory:
+sourceDirectory: .
 enableGpu: False
 baseImage:
 baseImageRegistry:
