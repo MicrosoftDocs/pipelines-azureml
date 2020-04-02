@@ -7,12 +7,14 @@
 .azureml
 run.json
 model.json
+outputs/
 
 # User-specific files
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+temp/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

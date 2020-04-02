@@ -1,3 +1,8 @@
+# All files or directories listed in this file will be excluded when:
+# - sending a training job to AzureML
+# - deploying an model for inferencing to ACI or AKS
+# The format of this file is the same as .gitignore
+
 .ipynb_checkpoints
 azureml-logs
 .azureml
@@ -5,3 +10,4 @@ azureml-logs
 outputs
 azureml-setup
 docs
+__pycache__
