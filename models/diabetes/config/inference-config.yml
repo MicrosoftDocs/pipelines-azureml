@@ -1,9 +1,15 @@
 entryScript: score.py
-runtime: python
-condaFile: config/inference-conda.yml
-extraDockerfileSteps:
-schemaFile:
-sourceDirectory: .
-enableGpu: False
-baseImage:
-baseImageRegistry:
+sourceDirectory: "."
+environment:
+  docker:
+    arguments: []
+    baseImage: mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04
+  environmentVariables:
+    EXAMPLE_ENV_VAR: EXAMPLE_VALUE
+  name: my-deploy-env
+  python:
+    condaDependencies: {}
+    condaDependenciesFile: config/inference-conda.yml
+    interpreterPath: python
+    userManagedDependencies: false
+  version: '1'
