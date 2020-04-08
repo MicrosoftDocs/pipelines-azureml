@@ -2,7 +2,6 @@ entryScript: score.py
 environment:
   docker:
     arguments: []
-    baseDockerfile: 
     baseImage: mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04
   environmentVariables:
     EXAMPLE_ENV_VAR: EXAMPLE_VALUE
