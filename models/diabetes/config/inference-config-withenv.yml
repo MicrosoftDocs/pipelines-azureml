@@ -1,0 +1,29 @@
+entryScript: score.py
+environment:
+  docker:
+    arguments: []
+    baseDockerfile: 
+    baseImage: mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04
+    enabled: true
+    sharedVolumes: true
+    shmSize: 
+  environmentVariables:
+    EXAMPLE_ENV_VAR: EXAMPLE_VALUE
+  name: my-deploy-env
+  python:
+    baseCondaEnvironment: 
+    condaDependencies:
+      channels:
+      - conda-forge
+      dependencies:
+      - python=3.6.2
+      - pip:
+        - azureml-defaults
+        - azureml-telemetry
+        - scikit-learn
+        - inference-schema[numpy-support]
+      name: project_environment
+    condaDependenciesFile: 
+    interpreterPath: python
+    userManagedDependencies: false
+  version: '1'
