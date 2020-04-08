@@ -1,4 +1,5 @@
 entryScript: score.py
+sourceDirectory: .
 environment:
   docker:
     arguments: []
