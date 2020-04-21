@@ -1,6 +1,6 @@
 # Introduction 
 
-This repo shows an E2E training and deployment pipeline with Azure Machine Learning's CLI for implementing MLOps. For more info, please visit [Azure Machine Learning CLI documentation](https://docs.microsoft.com/azure/machine-learning/service/reference-azure-machine-learning-cli).
+This repo shows an E2E training and deployment pipeline with Azure Machine Learning's CLI. For more info, please visit [Azure Machine Learning CLI documentation](https://docs.microsoft.com/azure/machine-learning/service/reference-azure-machine-learning-cli).
 
 This example requires some familiarity with Azure Pipelines or GitHub Actions. For more information, see [here](https://docs.microsoft.com/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=tfs-2018-2).
 
