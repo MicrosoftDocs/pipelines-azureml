@@ -1,0 +1,76 @@
+{
+    "databricks": {
+        "eggLibraries": [],
+        "jarLibraries": [],
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": []
+    },
+    "docker": {
+        "arguments": [],
+        "baseDockerfile": null,
+        "baseImage": "microsoft/mmlspark:0.15",
+        "baseImageRegistry": {
+            "address": null,
+            "password": null,
+            "username": null
+        },
+        "enabled": false,
+        "sharedVolumes": true,
+        "shmSize": null
+    },
+    "environmentVariables": {
+        "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+    },
+    "inferencingStackVersion": "latest",
+    "name": "AzureML-PySpark-MmlSpark-0.15",
+    "python": {
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "channels": [
+                "conda-forge"
+            ],
+            "dependencies": [
+                "python=3.6.2",
+                {
+                    "pip": [
+                        "azureml-core",
+                        "azureml-defaults",
+                        "azureml-telemetry",
+                        "azureml-train-restclients-hyperdrive",
+                        "azureml-train-core"
+                    ]
+                }
+            ],
+            "name": "project_environment"
+        },
+        "condaDependenciesFile": null,
+        "interpreterPath": "python",
+        "userManagedDependencies": false
+    },
+    "r": null,
+    "spark": {
+        "packages": [
+            {
+                "artifact": "mmlspark_2.11",
+                "group": "com.microsoft.ml.spark",
+                "version": "0.15"
+            },
+            {
+                "artifact": "azure-storage",
+                "group": "com.microsoft.azure",
+                "version": "2.0.0"
+            },
+            {
+                "artifact": "hadoop-azure",
+                "group": "org.apache.hadoop",
+                "version": "2.7.0"
+            }
+        ],
+        "precachePackages": true,
+        "repositories": [
+            "https://mmlspark.azureedge.net/maven"
+        ]
+    },
+    "version": null
+}

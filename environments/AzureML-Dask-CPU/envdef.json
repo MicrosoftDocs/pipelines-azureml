@@ -1,0 +1,69 @@
+{
+    "name": "AzureML-Dask-CPU",
+    "version": null,
+    "environmentVariables": {
+        "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+    },
+    "python": {
+        "userManagedDependencies": false,
+        "interpreterPath": "python",
+        "condaDependenciesFile": null,
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "name": "project_environment",
+            "channels": [
+                "conda-forge",
+                "pytorch",
+                "defaults"
+            ],
+            "dependencies": [
+                "python=3.6.9",
+                {
+                  "pip": [
+                        "adlfs",
+                        "azureml-core",
+                        "azureml-dataprep",
+                        "dask[complete]",
+                        "dask-ml[complete]",
+                        "distributed",
+                        "fastparquet",
+                        "fsspec",
+                        "joblib",
+                        "jupyterlab",
+                        "lz4",
+                        "mpi4py",
+                        "notebook",
+                        "pyarrow"
+                    ]
+                }
+            ]
+        }
+    },
+    "docker": {
+        "enabled": true,
+        "baseImage": "mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04",
+        "baseDockerfile": null,
+        "sharedVolumes": true,
+        "shmSize": null,
+        "arguments": [],
+        "baseImageRegistry": {
+            "address": null,
+            "username": null,
+            "password": null
+        }
+    },
+    "r": null,
+    "spark": {
+        "repositories": [],
+        "packages": [],
+        "precachePackages": true
+    },
+    "databricks": {
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": [],
+        "jarLibraries": [],
+        "eggLibraries": []
+    },
+    "inferencingStackVersion": null
+}

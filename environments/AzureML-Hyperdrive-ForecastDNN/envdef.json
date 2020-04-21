@@ -1,0 +1,53 @@
+{
+    "databricks": {
+        "eggLibraries": [],
+        "jarLibraries": [],
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": []
+    },
+    "docker": {
+        "arguments": [],
+        "baseDockerfile": null,
+        "baseImage": "mcr.microsoft.com/azureml/base-gpu:openmpi3.1.2-cuda10.0-cudnn7-ubuntu16.04",
+        "baseImageRegistry": null,
+        "enabled": true,
+        "sharedVolumes": true,
+        "shmSize": "1g"
+    },
+    "environmentVariables": {},
+    "inferencingStackVersion": null,
+    "name": "AzureML-Hyperdrive-ForecastDNN",
+    "python": {
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "dependencies": [
+                "python=3.7",
+                {
+                    "pip": [
+                        "azureml-core",
+                        "azureml-pipeline-core",
+                        "azureml-telemetry",
+                        "azureml-defaults",
+                        "azureml-automl-core",
+                        "azureml-automl-runtime",
+                        "azureml-train-automl-client",
+                        "azureml-train-automl-runtime",
+                        "azureml-contrib-automl-dnn-forecasting"
+                    ]
+                }
+            ],
+            "name": "project_environment"
+        },
+        "condaDependenciesFile": null,
+        "interpreterPath": "python",
+        "userManagedDependencies": false
+    },
+    "r": null,
+    "spark": {
+        "packages": [],
+        "precachePackages": true,
+        "repositories": []
+    },
+    "version": null
+}

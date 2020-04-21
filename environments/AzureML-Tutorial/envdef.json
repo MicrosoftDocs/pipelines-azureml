@@ -1,0 +1,80 @@
+{
+    "databricks": {
+        "eggLibraries": [],
+        "jarLibraries": [],
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": []
+    },
+    "docker": {
+        "arguments": [],
+        "baseDockerfile": null,
+        "baseImage": "mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04",
+        "baseImageRegistry": {
+            "address": null,
+            "password": null,
+            "username": null
+        },
+        "enabled": false,
+        "sharedVolumes": true,
+        "shmSize": null
+    },
+    "environmentVariables": {
+        "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+    },
+    "inferencingStackVersion": null,
+    "name": "AzureML-Tutorial",
+    "python": {
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "channels": [
+                "anaconda",
+                "conda-forge"
+            ],
+            "dependencies": [
+                "python=3.6.2",
+                {
+                    "pip": [
+                        "azureml-core",
+                        "azureml-defaults",
+                        "azureml-telemetry",
+                        "azureml-train-restclients-hyperdrive",
+                        "azureml-train-core",
+                        "azureml-widgets",
+                        "azureml-pipeline-core",
+                        "azureml-pipeline-steps",
+                        "azureml-opendatasets",
+                        "azureml-automl-core",
+                        "azureml-automl-runtime",
+                        "azureml-train-automl-client",
+                        "azureml-train-automl-runtime",
+                        "azureml-train-automl",
+                        "azureml-train",
+                        "azureml-sdk",
+                        "azureml-interpret",
+                        "azureml-tensorboard",
+                        "azureml-mlflow",
+                        "mlflow",
+                        "sklearn-pandas"
+                    ]
+                },
+                "pandas",
+                "numpy",
+                "tqdm",
+                "scikit-learn",
+                "matplotlib"
+            ],
+            "name": "project_environment"
+        },
+        "condaDependenciesFile": null,
+        "interpreterPath": "python",
+        "userManagedDependencies": false
+    },
+    "r": null,
+    "spark": {
+        "packages": [],
+        "precachePackages": true,
+        "repositories": []
+    },
+    "version": null
+}

@@ -1,0 +1,54 @@
+{
+    "databricks": {
+        "eggLibraries": [],
+        "jarLibraries": [],
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": []
+    },
+    "docker": {
+        "arguments": [],
+        "baseDockerfile": null,
+        "baseImage": "mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04",
+        "baseImageRegistry": {
+            "address": null,
+            "password": null,
+            "username": null
+        },
+        "enabled": false,
+        "sharedVolumes": true,
+        "shmSize": "2g"
+    },
+    "environmentVariables": {
+        "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+    },
+    "inferencingStackVersion": null,
+    "name": "AzureML-Designer-IO",
+    "python": {
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "channels": [
+                "defaults"
+            ],
+            "dependencies": [
+                "python=3.6.8",
+                {
+                    "pip": [
+                        "azureml-designer-dataio-modules==0.0.25"
+                    ]
+                }
+            ],
+            "name": "project_environment"
+        },
+        "condaDependenciesFile": null,
+        "interpreterPath": "python",
+        "userManagedDependencies": false
+    },
+    "r": null,
+    "spark": {
+        "packages": [],
+        "precachePackages": true,
+        "repositories": []
+    },
+    "version": null
+}

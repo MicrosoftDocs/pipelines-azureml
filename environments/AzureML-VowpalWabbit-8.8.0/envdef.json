@@ -1,0 +1,56 @@
+{
+    "databricks": {
+        "eggLibraries": [],
+        "jarLibraries": [],
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": []
+    },
+    "docker": {
+        "arguments": [],
+        "baseDockerfile": "FROM mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu18.04\nRUN apt-get update && apt-get install -y --no-install-recommends apt-utils software-properties-common build-essential libboost-all-dev zlib1g-dev cmake && pip install --upgrade pip\nRUN git clone --branch 8.8.0 --recursive https://github.com/VowpalWabbit/vowpal_wabbit.git && cd vowpal_wabbit && mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF -DVW_INSTALL=ON -DBUILD_PYTHON=ON -DPY_VERSION=3.6.2 && make install && cd .. && pip install .",
+        "baseImage": null,
+        "baseImageRegistry": {
+            "address": null,
+            "password": null,
+            "username": null
+        },
+        "enabled": true,
+        "sharedVolumes": true,
+        "shmSize": null
+    },
+    "environmentVariables": {
+        "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+    },
+    "inferencingStackVersion": null,
+    "name": "AzureML-VowpalWabbit-8.8.0",
+    "python": {
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "channels": [
+                "conda-forge"
+            ],
+            "dependencies": [
+                "python=3.6.2",
+                {
+                    "pip": [
+                        "azureml-core",
+                        "azureml-defaults",
+                        "azureml-dataprep[fuse,pandas]"
+                    ]
+                }
+            ],
+            "name": "project_environment"
+        },
+        "condaDependenciesFile": null,
+        "interpreterPath": "python",
+        "userManagedDependencies": false
+    },
+    "r": null,
+    "spark": {
+        "packages": [],
+        "precachePackages": true,
+        "repositories": []
+    },
+    "version": null
+}

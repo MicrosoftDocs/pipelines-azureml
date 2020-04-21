@@ -1,0 +1,69 @@
+{
+    "name": "AzureML-Dask-GPU",
+    "version": null,
+    "environmentVariables": {
+        "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+    },
+    "python": {
+        "userManagedDependencies": false,
+        "interpreterPath": "python",
+        "condaDependenciesFile": null,
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "name": "project_environment",
+            "channels": [
+                "conda-forge"
+            ],
+            "dependencies": [
+                "python=3.6.9",
+                {
+                  "pip": [
+                        "azureml-defaults",
+                        "adlfs",
+                        "azureml-core",
+                        "azureml-dataprep",
+                        "dask[complete]",
+                        "dask-ml[complete]",
+                        "distributed",
+                        "fastparquet",
+                        "fsspec",
+                        "joblib",
+                        "jupyterlab",
+                        "lz4",
+                        "mpi4py",
+                        "notebook",
+                        "pyarrow"
+                    ]
+                },
+                "matplotlib"
+            ]
+        }
+    },
+    "docker": {
+        "enabled": true,
+        "baseImage": "todrabas/aml_rapids:latest",
+        "baseDockerfile": null,
+        "sharedVolumes": true,
+        "shmSize": "2g",
+        "arguments": [],
+        "baseImageRegistry": {
+            "address": null,
+            "username": null,
+            "password": null
+        }
+    },
+    "r": null,
+    "spark": {
+        "repositories": [],
+        "packages": [],
+        "precachePackages": true
+    },
+    "databricks": {
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": [],
+        "jarLibraries": [],
+        "eggLibraries": []
+    },
+    "inferencingStackVersion": null
+}

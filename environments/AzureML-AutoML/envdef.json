@@ -1,0 +1,71 @@
+{
+    "databricks": {
+        "eggLibraries": [],
+        "jarLibraries": [],
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": []
+    },
+    "docker": {
+        "arguments": [],
+        "baseDockerfile": null,
+        "baseImage": "mcr.microsoft.com/azureml/base:intelmpi2018.3-ubuntu16.04",
+        "baseImageRegistry": {
+            "address": null,
+            "password": null,
+            "username": null
+        },
+        "enabled": false,
+        "sharedVolumes": true,
+        "shmSize": null
+    },
+    "environmentVariables": {
+        "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+    },
+    "inferencingStackVersion": null,
+    "name": "AzureML-AutoML",
+    "python": {
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "channels": [
+                "anaconda",
+                "conda-forge",
+                "pytorch"
+            ],
+            "dependencies": [
+                "python=3.6.2",
+                {
+                    "pip": [
+                        "azureml-core",
+                        "azureml-pipeline-core",
+                        "azureml-telemetry",
+                        "azureml-defaults",
+                        "azureml-interpret",
+                        "azureml-explain-model",
+                        "azureml-automl-core",
+                        "azureml-automl-runtime",
+                        "azureml-train-automl-client",
+                        "azureml-train-automl-runtime",
+                        "inference-schema"
+                    ]
+                },
+                "numpy>=1.16.0,<=1.16.2",
+                "pandas>=0.21.0,<=0.23.4",
+                "py-xgboost<=0.90",
+                "fbprophet==0.5",
+                "setuptools-git"
+            ],
+            "name": "project_environment"
+        },
+        "condaDependenciesFile": null,
+        "interpreterPath": "python",
+        "userManagedDependencies": false
+    },
+    "r": null,
+    "spark": {
+        "packages": [],
+        "precachePackages": true,
+        "repositories": []
+    },
+    "version": null
+}

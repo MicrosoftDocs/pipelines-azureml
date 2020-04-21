@@ -1,0 +1,64 @@
+{
+    "databricks": {
+        "eggLibraries": [],
+        "jarLibraries": [],
+        "mavenLibraries": [],
+        "pypiLibraries": [],
+        "rcranLibraries": []
+    },
+    "docker": {
+        "arguments": [],
+        "baseDockerfile": null,
+        "baseImage": "mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04",
+        "baseImageRegistry": {
+            "address": null,
+            "password": null,
+            "username": null
+        },
+        "enabled": false,
+        "sharedVolumes": true,
+        "shmSize": null
+    },
+    "environmentVariables": {
+        "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+    },
+    "inferencingStackVersion": null,
+    "name": "AzureML-PyTorch-1.1-CPU",
+    "python": {
+        "baseCondaEnvironment": null,
+        "condaDependencies": {
+            "channels": [
+                "conda-forge"
+            ],
+            "dependencies": [
+                "python=3.6.2",
+                {
+                    "pip": [
+                        "azureml-core",
+                        "azureml-defaults",
+                        "azureml-telemetry",
+                        "azureml-train-restclients-hyperdrive",
+                        "azureml-train-core",
+                        "torch==1.1",
+                        "torchvision==0.2.1",
+                        "mkl==2018.0.3",
+                        "horovod==0.16.1",
+                        "tensorboard==1.14.0",
+                        "future==0.17.1"
+                    ]
+                }
+            ],
+            "name": "project_environment"
+        },
+        "condaDependenciesFile": null,
+        "interpreterPath": "python",
+        "userManagedDependencies": false
+    },
+    "r": null,
+    "spark": {
+        "packages": [],
+        "precachePackages": true,
+        "repositories": []
+    },
+    "version": null
+}
