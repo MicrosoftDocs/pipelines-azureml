@@ -13,5 +13,5 @@ data:
     mydataset:
         dataLocation:
             datapath:
-                datastore_name:workspaceblobstore
-                relative_path:trainingdata
+                datastore_name: workspaceblobstore
+                relative_path: trainingdata
