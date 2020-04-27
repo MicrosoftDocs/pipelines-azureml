@@ -15,7 +15,3 @@ data:
             datapath:
                 datastore_name:workspaceblobstore
                 relative_path:trainingdata
-        mechanism: mount
-        environmentVariableName: mydataset
-        pathOnCompute: /data
-        overwrite: false
