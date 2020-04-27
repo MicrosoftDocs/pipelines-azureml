@@ -9,3 +9,24 @@ environment:
   docker:
     enabled: true
     baseImage: mcr.microsoft.com/azureml/base:0.2.4
+data:
+  mydataset:
+    dataLocation:
+# the Dataset used for this run.
+      dataset:
+# the DataPath used for this run.
+      datapath:
+# Name of the datastore.
+        datastoreName: workspaceblobstore
+# Relative path on datastore.
+        relativePath: train-dataset
+# Whether to create new folder.
+    createOutputDirectories:
+# The mode to handle
+    mechanism: direct
+# Point where the data is download or mount or upload.
+    environmentVariableName:
+# relative path where the data is download or mount or upload.
+    pathOnCompute:
+# Whether to overwrite the data if existing.
+    overwrite:
