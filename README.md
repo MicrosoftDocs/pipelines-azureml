@@ -17,12 +17,12 @@ First, fork (or clone) the repository to your own GitHub account, so that you ca
 If you are familar with Azure Machine Learning and Azure DevOps, you can follow these shortend instructions:
 
 1. Fork or clone this repo
-1. Create an [Azure Machine Learning workspace](https://docs.microsoft.com/azure/machine-learning/service/setup-create-workspace) named `aml-demo` in a resource group named `aml-demo`
-1. Create a new project in Azure DevOps/Pipelines
-1. Goto `Project settings`, select `Service connections`, create a new connection of type `Azure Resource Manager`, select `Service principal (automatic)` and configure it to the `Resource Group` of your Machine Learning workspace. Name it `azmldemows`. For more details see [here](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops) or follow the [tutorial](docs/intial_setup.md).
-1. Create a new pipeline for the project, point it to the `pipelines/diabetes-train-and-deploy.yml` file in your forked GitHub repo. This defines an example pipeline.
-1. Modify the `pipelines/diabetes-train-and-deploy.yml` and change the `ml-rg` variable to the Azure resource group that contains your workspace. You may also change the `ml-ws` variable to the name of your Azure Machine Learning service workspace.
-1. Run the pipeline
+2. Create an [Azure Machine Learning workspace](https://docs.microsoft.com/azure/machine-learning/service/setup-create-workspace) named `aml-demo` in a resource group named `aml-demo`
+3. Create a new project in Azure DevOps/Pipelines
+4. Goto `Project settings`, select `Service connections`, create a new connection of type `Azure Resource Manager`, select `Service principal (automatic)` and configure it to the `Resource Group` of your Machine Learning workspace. Name it `azmldemows`. For more details see [here](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops) or follow the [tutorial](docs/intial_setup.md).
+5. Create a new pipeline for the project, point it to the `pipelines/diabetes-train-and-deploy.yml` file in your forked GitHub repo. This defines an example pipeline.
+6. Modify the `pipelines/diabetes-train-and-deploy.yml` and change the `ml-rg` variable to the Azure resource group that contains your workspace. You may also change the `ml-ws` variable to the name of your Azure Machine Learning service workspace.
+7. Run the pipeline.
 
 ## Declare variables for CI/CD pipeline
 
