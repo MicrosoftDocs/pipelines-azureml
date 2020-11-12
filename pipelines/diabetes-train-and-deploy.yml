@@ -6,7 +6,7 @@ variables:
   ml-path: 'models/diabetes' # Model directory path in repo
   ml-exp: 'exp-test' # Experiment name
   ml-model-name: 'diabetes-model' # Model name
-  ml-aks-name: 'comCLU' # AKS cluster name
+  ml-aks-name: 'AKS-CLU' # AKS cluster name
 #DevComp
 trigger:
 - master
