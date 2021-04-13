@@ -1,5 +1,5 @@
 variables:
-  ml-ws-connection: 'azmldemows' # Workspace Service Connection name
+  ml-ws-connection: 'demo-DP100' # Workspace Service Connection name
   ml-ws: 'wksdp100-001' # AML Workspace name
   ml-rg: 'rg-course-DP100' # AML resource Group name
   ml-ct: 'cpu-cluster-1' # AML Compute cluster name
