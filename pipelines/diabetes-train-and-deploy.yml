@@ -39,7 +39,7 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml computetarget create amlcompute -n $(ml-ct) --vm-size STANDARD_DS3_V2 --max-nodes 1'
+    inlineScript: 'az ml computetarget create amlcompute -n $(ml-ct) --vm-size STANDARD_D2_V2 --max-nodes 1'
   
 - task: AzureCLI@2
   displayName: 'Train model'
