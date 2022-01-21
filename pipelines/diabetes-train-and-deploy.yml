@@ -70,7 +70,7 @@ steps:
     workingDirectory: $(ml-path)
     scriptLocation: inlineScript
     scriptType: 'bash'
-    inlineScript: 'az ml model deploy -n test-ado-aci -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
+    inlineScript: 'az ml model deploy -n test-ado-aci -f model.json --ic config/inference-config-test.yml --dc config/deployment-config-aci.yml --overwrite'
 
 # Add potential automated tests
 

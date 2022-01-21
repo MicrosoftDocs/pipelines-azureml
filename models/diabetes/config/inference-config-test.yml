@@ -1,6 +1,6 @@
 entryScript: score_test.py
 runtime: python
-condaFile: config/inference-conda.yml
+condaFile: config/inference-conda-test-wrong.yml
 extraDockerfileSteps:
 schemaFile:
 sourceDirectory: .
