@@ -15,7 +15,7 @@ dependencies:
   # Currently Azure ML only supports 3.5.2 and later.
 
   - python=3.8
-  # - pip=21.2.4
+  - pip=21.2.4
 
   - pip:
       # Required packages for AzureML execution, history, and data preparation.
