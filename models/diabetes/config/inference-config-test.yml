@@ -1,0 +1,9 @@
+entryScript: score_test.py
+runtime: python
+condaFile: config/inference-conda-test.yml
+extraDockerfileSteps:
+schemaFile:
+sourceDirectory: .
+enableGpu: False
+baseImage:
+baseImageRegistry:
