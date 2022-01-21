@@ -10,7 +10,7 @@ def init():
     print("reach init()")
 
     model_path = Model.get_model_path("test-ado-model")
-    with open(os.path.join(model_path, "test_models", "AD3_v1.pkl"), "rb") as file:
+    with open(os.path.join(model_path, "AD3_v1.pkl"), "rb") as file:
         model = pickle.load(file)
 
     print("model loaded successfully")
