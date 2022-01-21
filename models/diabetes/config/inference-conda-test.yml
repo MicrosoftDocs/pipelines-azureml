@@ -14,19 +14,17 @@ dependencies:
 
   # Currently Azure ML only supports 3.5.2 and later.
 
-- python=3.8
+  - python=3.8
 
-- pip:
-    # Required packages for AzureML execution, history, and data preparation.
+  - pip:
+      # Required packages for AzureML execution, history, and data preparation.
 
-  - azureml-defaults
-  - azure-keyvault-secrets
-  - azure-identity
-  - azure-servicebus
-  
-  - scikit-learn==0.22.2
-  - xgboost==1.2.1
-  - catboost==0.24.2
-channels:
-- anaconda
-- conda-forge
+    - azureml-defaults
+    - azure-keyvault-secrets
+    - azure-identity
+    - azure-servicebus
+    
+    - scikit-learn==0.22.2
+    - xgboost==1.2.1
+    - catboost==0.24.2
+
