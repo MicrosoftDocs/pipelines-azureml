@@ -2,7 +2,7 @@ variables:
   ml-ws-connection: 'edapmlops_aml' # Workspace Service Connection name
   ml-ws: 'edapmlopstest' # AML Workspace name
   ml-rg: 'dev-edap-ml-ops' # AML resource Group name
-  ml-ct: 'cpu-cluster' # AML Compute cluster name
+  ml-ct: 'cpu-cluster-1' # AML Compute cluster name
   ml-path: 'models/diabetes' # Model directory path in repo
   ml-exp: 'aml_devops' # Experiment name
   ml-model-name: 'diabetes-model' # Model name
@@ -12,7 +12,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-18.04'
+  vmImage: 'ubuntu latest'
 
 steps:
 - task: AzureCLI@2
