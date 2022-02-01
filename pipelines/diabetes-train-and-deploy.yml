@@ -11,7 +11,7 @@ trigger:
   - master
 jobs:
 - job: myJob
-  timeoutInMinutes: 120
+  timeoutInMinutes: 1000
 
   pool:
     vmImage: 'ubuntu latest'
