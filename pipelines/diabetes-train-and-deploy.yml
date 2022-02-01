@@ -42,6 +42,8 @@ steps:
     inlineScript: 'az ml computetarget create amlcompute -n $(ml-ct) --vm-size STANDARD_D2_V2 --max-nodes 1'
   
 - task: AzureCLI@2
+  retryCountOnTaskFailure: 5 #default is zero
+  timeoutInMinutes: 120 # default is 60 mins 
   displayName: 'Train model'
   inputs:
     azureSubscription: $(ml-ws-connection)
