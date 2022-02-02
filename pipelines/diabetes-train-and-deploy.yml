@@ -72,7 +72,7 @@ jobs:
       workingDirectory: $(ml-path)
       scriptLocation: inlineScript
       scriptType: 'bash'
-      inlineScript: 'az ml model deploy -n diabetes-qa-aci -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
+      inlineScript: 'az ml model deploy -n diabetes-qa-aci -m diabetes-model:2 --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
 
   # Add potential automated tests
 
@@ -92,7 +92,7 @@ jobs:
       workingDirectory: $(ml-path)
       scriptLocation: inlineScript
       scriptType: 'bash'
-      inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
+      inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -m diabetes-model:2 --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
 
   #- task: AzureCLI@2
   #  displayName: 'Delete deployed service'
