@@ -72,14 +72,14 @@ steps:
 
 # Add potential automated tests
 
-- task: AzureCLI@2
-  displayName: 'Create AKS cluster'
-  inputs:
-    azureSubscription: $(ml-ws-connection)
-    workingDirectory: $(ml-path)
-    scriptLocation: inlineScript
-    scriptType: 'bash'
-    inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --cluster-purpose DevTest'
+# - task: AzureCLI@2
+#   displayName: 'Create AKS cluster'
+#   inputs:
+#     azureSubscription: $(ml-ws-connection)
+#     workingDirectory: $(ml-path)
+#     scriptLocation: inlineScript
+#     scriptType: 'bash'
+#     inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --cluster-purpose DevTest'
 
 - task: AzureCLI@2
   displayName: 'Deploy model to AKS for Production'
