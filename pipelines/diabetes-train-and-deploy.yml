@@ -61,14 +61,14 @@ steps:
     scriptType: 'bash'
     inlineScript: 'az ml model register -n $(ml-model-name) -f run.json --asset-path outputs/ridge_0.95.pkl -t model.json'
 
-# - task: AzureCLI@2
-#   displayName: 'Deploy model to ACI for QA'
-#   inputs:
-#     azureSubscription: $(ml-ws-connection)
-#     workingDirectory: $(ml-path)
-#     scriptLocation: inlineScript
-#     scriptType: 'bash'
-#     inlineScript: 'az ml model deploy -n diabetes-qa-aci -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
+- task: AzureCLI@2
+  displayName: 'Deploy model to ACI for QA'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml model deploy -n diabetes-qa-aci -f model.json --ic config/inference-config.yml --dc config/deployment-config-aci.yml --overwrite'
 
 # Add potential automated tests
 
@@ -81,14 +81,14 @@ steps:
 #     scriptType: 'bash'
 #     inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --cluster-purpose DevTest'
 
-- task: AzureCLI@2
-  displayName: 'Deploy model to AKS for Production'
-  inputs:
-    azureSubscription: $(ml-ws-connection)
-    workingDirectory: $(ml-path)
-    scriptLocation: inlineScript
-    scriptType: 'bash'
-    inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
+# - task: AzureCLI@2
+#   displayName: 'Deploy model to AKS for Production'
+#   inputs:
+#     azureSubscription: $(ml-ws-connection)
+#     workingDirectory: $(ml-path)
+#     scriptLocation: inlineScript
+#     scriptType: 'bash'
+#     inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
 
 # - task: AzureCLI@2
 #  displayName: 'Delete deployed service'
