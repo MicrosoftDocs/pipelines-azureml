@@ -22,6 +22,7 @@
                 ],
                 "dependencies": [
                     "python=3.6.2",
+                    "pip==20.2.4",
                     {
                         "pip": [
                             "azureml-defaults",
