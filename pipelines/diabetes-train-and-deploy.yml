@@ -72,29 +72,29 @@ steps:
 
 # Add potential automated tests
 
-# - task: AzureCLI@2
-#   displayName: 'Create AKS cluster'
-#   inputs:
-#     azureSubscription: $(ml-ws-connection)
-#     workingDirectory: $(ml-path)
-#     scriptLocation: inlineScript
-#     scriptType: 'bash'
-#     inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --cluster-purpose DevTest'
+- task: AzureCLI@2
+  displayName: 'Create AKS cluster'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml computetarget create aks --name $(ml-aks-name) --resource-group $(ml-rg) --location eastus2 --node-count 1 --node-vm-size "Standard_B2s" --cluster-purpose DevTest'
 
-# - task: AzureCLI@2
-#   displayName: 'Deploy model to AKS for Production'
-#   inputs:
-#     azureSubscription: $(ml-ws-connection)
-#     workingDirectory: $(ml-path)
-#     scriptLocation: inlineScript
-#     scriptType: 'bash'
-#     inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
+- task: AzureCLI@2
+  displayName: 'Deploy model to AKS for Production'
+  inputs:
+    azureSubscription: $(ml-ws-connection)
+    workingDirectory: $(ml-path)
+    scriptLocation: inlineScript
+    scriptType: 'bash'
+    inlineScript: 'az ml model deploy --name diabetes-prod-aks --ct $(ml-aks-name) -f model.json --ic config/inference-config.yml --dc config/deployment-config-aks.yml  --overwrite'
 
-# - task: AzureCLI@2
-#  displayName: 'Delete deployed service'
-#  inputs:
-#    azureSubscription: $(ml-ws-connection)
-#    workingDirectory: $(ml-path)
-#    scriptLocation: inlineScript
-#    scriptType: 'bash'
-#    inlineScript: 'az ml service delete -n diabetes-qa-aci'
+- task: AzureCLI@2
+ displayName: 'Delete deployed service'
+ inputs:
+   azureSubscription: $(ml-ws-connection)
+   workingDirectory: $(ml-path)
+   scriptLocation: inlineScript
+   scriptType: 'bash'
+   inlineScript: 'az ml service delete -n diabetes-qa-aci'
