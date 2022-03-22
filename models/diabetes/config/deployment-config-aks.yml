@@ -1,4 +1,11 @@
-computeType: ACI
+computeType: AKS
+
+autoScaler:
+    autoscaleEnabled: True
+    minReplicas: 1
+    maxReplicas: 3
+    refreshPeriodInSeconds: 10
+    targetUtilization: 70
 
 containerResourceRequirements:
     cpu: 0.5
