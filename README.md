@@ -1,3 +1,7 @@
+# Note
+
+This repo uses Azure Machine Learning Python SDK v1 and is not actively maintained. For Azure Machine Learning Python SDK v2 examples, see https://github.com/Azure/azureml-examples. 
+
 # Introduction 
 
 This repo shows an E2E training and deployment pipeline with Azure Machine Learning's CLI. For more info, please visit [Azure Machine Learning CLI documentation](https://docs.microsoft.com/azure/machine-learning/service/reference-azure-machine-learning-cli).
